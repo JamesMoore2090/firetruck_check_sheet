@@ -1,0 +1,17 @@
+Random Info 
+
+this needs to be updated
+https://github.com/JamesMoore2090/quit-me.git
+email dr. raz
+get website address
+
+install flask
+install posgresql
+
+Set DBMS up
+
+find website and flask-afy it
+use Trello as a back log
+create a read me file on how to install the system
+
+Regularly update gitHub
