@@ -2,14 +2,26 @@ Random Info
 
 this needs to be updated
 https://github.com/JamesMoore2090/quit-me.git
-email dr. raz
+x email dr. raz
 get website address
 
+I am creating an application that will make quizzes and tests from a random bank of questions. 
+I plan to have 2 types of users an admin user and a regular user. 
+The admin user will have the capabilities to create quizzes and test and assigning them to the users,
+create questions, create users, and see the grading per regular user. 
+The regular user will be able to take pre-created tests and quizzes or create a quiz for the selected book and chapters. 
+
 install flask
+sudo easy_install flask markdown
 install posgresql
+sudo service postgresql start
+sudo -u postgres -h localhost
 
 Set DBMS up
 
+sudo apt-get install postgresql-contrib-9.3
+
+sudo apt-get install python-psycopg2
 find website and flask-afy it
 use Trello as a back log
 create a read me file on how to install the system
