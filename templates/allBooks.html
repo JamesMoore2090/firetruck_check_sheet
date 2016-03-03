@@ -7,16 +7,15 @@
     <div class="container-fluid">
     <table class="table table-striped">
         <tr>
-            <th>Username</th>
-            <th>User Type</th>
-            <!--<th>Classes</th>-->
+            <th>Book</th>
+            <th>Class</th>
         </tr>
     
     
-    {% for user in users %}
+    {% for book in books %}
         <tr>
-            <td>{{user[0]}}</td>
-            <td>{{user[1]}}</td>
+            <td>{{book[0]}}</td>
+            <td>{{book[1]}}</td>
         <!--<td>user.class</td>-->
         </tr>
     {% endfor %}

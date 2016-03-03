@@ -1,0 +1,51 @@
+
+{% extends "layout.html" %}
+
+{% block main %}
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+
+<script src="static/js/addInput.js" language="Javascript" type="text/javascript"></script>
+
+
+
+<h1><b>Add Chapters</b></h1>
+
+<form method="POST" action = '/addChapters' class="form-vertical">
+     <!--<input type = "text" id = "counter" name = "counter" value = "">-->
+     
+     <div class="form-group">
+            <div class="col-sm-5">
+                <label for = "book">Please select a book and create a chapter.</label>
+     <select name = "book">
+         {% for book in books %}
+         <option value = "{{book[0]}}">{{book[0]}}</option> 
+         {% endfor %}
+     </select>
+     </div>
+     </div>
+     <div class="form-group">
+                <label for="Chapter" class="col-sm-2 control-label">Name of Chapter:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Chapter" id="nameBook" placeholder="Name of Chapter">
+                </div>
+                
+        </div>
+     
+     <!--<div id="dynamicInput">-->
+     <!--     Chapter 1<br><input type="text" name="Chapter_1">-->
+     <!--</div>-->
+     <!--<input type="button" value="Add another text input" onClick="addInput('dynamicInput');">-->
+    <br>
+    <br>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+            <button type="submit" class="btn btn-success">Add Chapter</button>
+        </div>
+    </div>
+</form>
+
+</div>
+</div>
+{% endblock %}
