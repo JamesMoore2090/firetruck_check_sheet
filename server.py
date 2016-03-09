@@ -255,6 +255,43 @@ def allChapter():
         books = cur.fetchall()
         return render_template('allChapters.html', books = books ,username = session['username'], userType = session['usertype'])
 
+
+@app.route('/assignClass', methods = ['GET', 'POST'])
+def assignClass():
+    
+    db = connectToDB()
+    cur = db.cursor()
+    if request.method == 'POST':
+        print 'update into something'
+        Class = request.form['class']
+        print Class
+        user = request.form['user']
+        print user
+        update = "UPDATE users SET class = (SELECT id_class FROM class WHERE class = '%s') WHERE usersname = '%s'" % (Class, user)
+        try:
+            cur.execute(update)
+        except:
+            print update
+            print '^failed'
+            db.rollback()
+        db.commit()
+        return render_template('adminhome.html' ,username = session['username'], userType = session['usertype'])
+
+    else:
+        selectUsers = 'SELECT usersname FROM users'
+        selectClass = 'SELECT class from class'
+        try:
+            cur.execute(selectUsers)
+            Users = cur.fetchall()
+            cur.execute(selectClass)
+            Class = cur.fetchall()
+        except:
+            print('Something failed')
+        
+        return render_template('assignClass.html',Users = Users, Classes = Class ,username = session['username'], userType = session['usertype'])
+
+
+
 @app.route('/logout', methods = ['GET'])
 def logout():
     if request.method == 'GET':

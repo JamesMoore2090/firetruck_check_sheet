@@ -15,7 +15,7 @@ install flask
 sudo easy_install flask markdown
 install posgresql
 sudo service postgresql start
-sudo -u postgres -h localhost
+
 
 Set DBMS up
 

@@ -6,7 +6,9 @@
     <div class="container-fluid">
         <h1><b>Add New Class</b></h1><br>
         {% if error%}
-            <font color = "red"><strong>Error:</strong> {{ error }} </font>
+        <div class="alert alert-success" role="alert">{{ error }} 
+        </div>
+            <!--<font color = "red"><strong>Error:</strong> {{ error }} </font>-->
             <br>
         {% endif %}
         <br>
