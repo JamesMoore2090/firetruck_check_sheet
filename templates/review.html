@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2><b>Review Check Sheet</b></h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Truck</th>
+        <th>Date</th>
+        <th>Officer Approved</th>
+    </tr>
+    {% for info in data %}
+        <tr>
+            <td><a href = "/view?check={{info[0]}}">{{info[0]}}</a></td>
+        {% if info[1] == 'rescue_engine' %}
+           <td>Rescue Engine 8</td>
+        {% else %}
+            <td>Engine 8</td>
+        {% endif %}
+            <td>{{info[2]}}</td>
+        {% if info[3] %}
+            <td>Yes</td>
+        {% else %}
+            <td>No</td>
+        {% endif %}
+        </tr> 
+    {% endfor %}
+</table>
+
+{% endblock %}

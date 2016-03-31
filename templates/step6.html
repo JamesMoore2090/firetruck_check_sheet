@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<form action = '/step6' method = 'POST' class="form-horizontal">
+    <h2><b>EMS Equipment</b></h2>
+    
+    <input type = "hidden" name = "check_id" value = '{{engID}}'>
+
+    <div class="form-group">
+    <label for="o2level" class="col-sm-2 control-label">Oxygen Level</label>
+    <div class="col-sm-5">
+          <input type="number" class="form-control" name = "o2level" required>
+    </div>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "jumpbag"> EMS Jump Bag
+        </label>
+    </div>
+    
+    
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "spareo2"> Spare Oxygen
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "collarbag"> Collar Bag
+        </label>
+    </div>
+
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "golves"> Gloves (S,M,L,XL)
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "clipboard"> Clipboard/Forms
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "suckunit"> Suction Unit
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "triagebag"> Triage Bag
+        </label>
+    </div>
+    
+    <div class="form-group">
+    <label for="lifepak" class="col-sm-2 control-label">LifePak or AED</label>
+    <div class="col-sm-5">
+        <label class="radio-inline">
+            <input type="radio" name="lifepak" value="pass"> Pass
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="lifepak" value="fail"> Fail
+        </label>
+    </div>
+    </div>  
+    
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "toughbook"> Tough Book
+        </label>
+    </div>
+
+<hr>
+
+    <div class="form-group">
+    <label for="notes" class="col-sm-2 control-label">Notes</label>
+    <div class="col-sm-5">
+          <textarea name = "notes" class="form-control" rows="3"></textarea>
+    </div>
+  </div>
+  
+  
+    <button type="submit" class="btn btn-primary">Next</button>
+  </form>
+
+
+{% endblock %}

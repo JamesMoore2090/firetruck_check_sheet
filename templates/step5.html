@@ -1,0 +1,269 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<form action = '/step5' method = 'POST' class="form-horizontal">
+    
+    <h2><b>Tools/Equipment</b></h2>
+    <input type = "hidden" name = "check_id" value = '{{engID}}'>
+    <input type = "hidden" name = "rescue_engine" value = '{{rescue_engine}}'>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "thermalimager"> Thermal Imager (+battery)
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "paktracker"> Pak Tracker
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "ladders"> Ladders (3)
+        </label>
+    </div>
+    
+    
+    <div class="form-group">
+    <label for="gasmonitor" class="col-sm-2 control-label">4 Gas Monitor (2)</label>
+    <div class="col-sm-5">
+          <input type="number" class="form-control" name = "gasmonitor" required>
+    </div>
+    </div>
+    
+    <div class="form-group">
+    <label for="handlights" class="col-sm-2 control-label">Handlights</label>
+    <div class="col-sm-5">
+          <input type="number" class="form-control" name = "handlights" required>
+    </div>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "binoculars"> Binoculars
+        </label>
+    </div>
+    
+    <div class="form-group">
+    <label for="smokedetectors" class="col-sm-2 control-label">Smoke Dectectors (3)</label>
+    <div class="col-sm-5">
+          <input type="number" class="form-control" name = "smokedetectors" required>
+    </div>
+    </div>
+    
+    <div class="form-group">
+    <label for="batteries" class="col-sm-2 control-label">9 Volt Batteries (10)</label>
+    <div class="col-sm-5">
+          <input type="number" class="form-control" name = "batteries" required>
+    </div>
+    </div>
+    
+    <div class="form-group">
+    <label for="SCBA" class="col-sm-2 control-label">SCBA (6)</label>
+    <div class="col-sm-5">
+          <input type="number" class="form-control" name = "SCBA" required>
+    </div>
+    </div>
+    
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "RITpack"> RIT Pack
+        </label>
+    </div>
+    
+    <div class="form-group">
+    <label for="roadflares" class="col-sm-2 control-label">Road Flares (6)</label>
+    <div class="col-sm-5">
+          <input type="number" class="form-control" name = "roadflares" required>
+    </div>
+    </div>
+    
+    <div class="form-group">
+    <label for="eroadflares" class="col-sm-2 control-label">ERoad Flares (6)</label>
+    <div class="col-sm-5">
+          <input type="number" class="form-control" name = "portRadio" required>
+    </div>
+    </div>
+    
+
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "hosenozzles"> Hoses and Nozzles
+        </label>
+    </div>
+
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "appliances"> Appliances and Adapters
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "roadsign"> Road Sign
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "absorbant"> Absorbant
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "handtools"> Handtools
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "sawzall"> Sawzall
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "chimneykit"> Chemney Kit
+        </label>
+    </div>
+
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "saws"> Saws
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "extinguishers"> Extinguishers
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "fans"> Fans (PPV, NPV)
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "spillcont"> Spill Containment Kit
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "salvage"> Salvage Equipment
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "lifeline"> Lifeline
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "utilityrope"> Utility Rope
+        </label>
+    </div>
+
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "rigging"> Rigging Bag
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "pikepoles"> Pike Poles
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "electicalequip"> Portable Lights/ Pigtails
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "hondalight"> Honda Light
+        </label>
+    </div>
+    
+    <!--Need to add the wagon info-->
+    {% if rescue_engine == 'rescue_engine' %}
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "cribbing"> Cribbing
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "spreaders"> Spreaders
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "ocutters"> O Cutters
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "hydropump"> Hydraulic Pump
+        </label>
+    </div>
+    
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "paratech"> Paratech
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "lchannel"> L Channels
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "portaPump"> Porta Pump
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "airbags"> Air bags
+        </label>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "airbagcontroller"> Air Bag Controller
+        </label>
+    </div>
+    
+    {% endif %}
+    
+    <!--Need to add handlights as a number field maybe change the radios too-->
+    
+    <button type="submit" class="btn btn-primary">Next</button>
+    
+    </form>
+
+
+{% endblock %}

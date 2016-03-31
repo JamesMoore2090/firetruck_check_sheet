@@ -98,8 +98,21 @@ CREATE TABLE IF NOT EXISTS answer (
   id_answer serial NOT NULL ,
   answer text NOT NULL,
   correct boolean NOT NULL,
-  source text NULL,
   question INT NOT NULL,
   PRIMARY KEY (id_answer),
     FOREIGN KEY (question) REFERENCES question (id_question)
+);
+
+-- -----------------------------------------------------
+-- Table answer
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS test ;
+
+CREATE TABLE IF NOT EXISTS test (
+  id_test serial NOT NULL ,
+  question1 int NULL,
+  correct boolean NOT NULL,
+  question INT NOT NULL,
+  PRIMARY KEY (id_test),
+    FOREIGN KEY (question1) REFERENCES question (id_question)
 );

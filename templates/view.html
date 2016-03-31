@@ -1,0 +1,803 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{%if brush %}
+<h2><b>{{brush.brush_truck_id}}Check Sheet</b></h2>
+{% else %}
+<h2><b>{{eng.engine_id}} Check Sheet</b></h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Truck:</th>
+        {% if eng.truck == 'rescue_engine' %}
+           <td>Rescue Engine 8</td>
+        {% else %}
+            <td>Engine 8</td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Date:</th>
+        <td>{{eng.check_date}}</td>
+    </tr>
+    <tr>
+        <th>Driver</th>
+        <td>{{eng.driver}}</td>
+    </tr>
+    <tr>
+        <th>Officer</th>
+        <td>{{eng.officer}}</td>
+    </tr>
+    <tr>
+        <th>Miles</th>
+        <td>{{eng.miles}}</td>
+    </tr>
+    <tr>
+        <th>Engine Hours</th>
+        <td>{{eng.hours}}</td>
+    </tr>
+    <tr>
+        <th>Fuel</th>
+        <td>{{eng.fuel}}</td>
+    </tr>
+    <tr>
+        <th>Fuel Card</th>
+        {% if eng.fuelcard%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Headlights</th>
+        {% if eng.headlights %}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Turn Signal</th>
+        {% if eng.turnsignals%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Marker Lights</th>
+        {% if eng.markerlights%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Warning Lights</th>
+        {% if eng.warninglights%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Sirens</th>
+        {% if eng.sirens%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Airhorn</th>
+        {% if eng.airhorn%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Tires</th>
+        {% if eng.tires%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th bgcolor="#999999">Pump/Generator</th>
+        <td bgcolor="#999999"></td>
+    </tr>
+    <tr>
+        <th>Water Level</th>
+        <td>{{eng.waterlevel}}</td>
+    </tr>
+    <tr>
+        <th>Foam Level</th>
+        <td>{{eng.foamlevel}}</td>
+    </tr>
+    <tr>
+        <th>Pump Operation</th>
+        {% if eng.pumpoperation%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Generator</th>
+        {% if eng.generator%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Scene Lights</th>
+        {% if eng.scenelights%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th bgcolor="#999999">Communication</th>
+        <td bgcolor="#999999"></td>
+    </tr>
+    <tr>
+        <th>Portable Radios</th>
+        <td>{{eng.portableradio}}</td>
+    </tr>
+    <tr>
+        <th>Helmet Markers</th>
+        {% if eng.helmetmarkers%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Passports</th>
+        {% if eng.passport%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Command Boards</th>
+        {% if eng.commandboard%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>ERG/Terrorism Guide</th>
+        {% if eng.erg%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Mapbooks</th>
+        {% if eng.mapbook%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Forms</th>
+        {% if eng.forms%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th bgcolor="#999999">Tools/Equipment</th>
+        <td bgcolor="#999999"></td>
+    </tr>
+    <tr>
+        <th>4 Gas Monitors</th>
+        <td>{{eng.gasmonitor}}</td>
+    </tr>
+    <tr>
+        <th>Handlights</th>
+        <td>{{eng.handlights}}</td>
+    </tr>
+    <tr>
+        <th>Smoke Detectors</th>
+        <td>{{eng.smokedetectors}}</td>
+    </tr>
+    <tr>
+        <th>Batteries</th>
+        <td>{{eng.batteries}}</td>
+    </tr>
+    <tr>
+        <th>SCBA</th>
+        <td>{{eng.scba}}</td>
+    </tr>
+    <tr>
+        <th>Road Flares</th>
+        <td>{{eng.roadflares}}</td>
+    </tr>
+    <tr>
+        <th>ERoad Flares</th>
+        <td>{{eng.eroadflares}}</td>
+    </tr>
+    <tr>
+        <th>Thermal Imager (+Battery)</th>
+        {% if eng.thermalimager%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Pack Tracker</th>
+        {% if eng.paktracker%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Ladders</th>
+        {% if eng.ladders%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Binoculars</th>
+        {% if eng.binoculars%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>RIT Pack</th>
+        {% if eng.ritpack%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Hoses and Nozzles</th>
+        {% if eng.hoses%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Appliances/Adapters</th>
+        {% if eng.appliances%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Road Sign</th>
+        {% if eng.roadsign%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Absorbent</th>
+        {% if eng.absorbant%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Handtools</th>
+        {% if eng.handtools%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Sawzalls</th>
+        {% if eng.sawzall%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Chimney Kit</th>
+        {% if eng.chimneykit%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Saws</th>
+        {% if eng.saws%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Extinguishers</th>
+        {% if eng.extinguishers%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Fans</th>
+        {% if eng.fans%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Spill Containment Kit</th>
+        {% if eng.spillcont%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Salvage Equipment</th>
+        {% if eng.salvage%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Lifeline</th>
+        {% if eng.lifeline%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Utility Rope</th>
+        {% if eng.utilityrope%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Rigging</th>
+        {% if eng.rigging%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Pike Poles</th>
+        {% if eng.pikepoles%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Electical Equipment</th>
+        {% if eng.electicalequip%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Honda Light</th>
+        {% if eng.hondalight%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    {% if eng.truck == 'rescue_engine' %}
+    <tr>
+        <th bgcolor="#999999">Extrication Equipment</th>
+        <td bgcolor="#999999"></td>
+    </tr>
+    <tr>
+        <th>Cribbing </th>
+        {% if eng.cribbing%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Spreaders </th>
+        {% if eng.spreaders%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>O Cutters </th>
+        {% if eng.ocutters%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Hydraulic Pump </th>
+        {% if eng.hydropump%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Paratech</th>
+        {% if eng.paratech%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>L Channels</th>
+        {% if eng.lchannel%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Porta Pump</th>
+        {% if eng.portapump%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Airbag Controller</th>
+        {% if eng.airbagcontroler%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Airbags</th>
+        {% if eng.airbags%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    
+    {% endif %}
+    <tr>
+        <th bgcolor="#999999">EMS Equipment</th>
+        <td bgcolor="#999999"></td>
+    </tr>
+    <tr>
+        <th>EMS Jump Bag</th>
+        {% if eng.jumpbag%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Spare Oxygen</th>
+        {% if eng.spareo2%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Collar Bag</th>
+        {% if eng.collarbag%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Gloves</th>
+        {% if eng.gloves%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Clipboard/Forms</th>
+        {% if eng.clipboard%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Suction Unit</th>
+        {% if eng.suckunit%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Triage Bag</th>
+        {% if eng.triagebag%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Tough Book</th>
+        {% if eng.toughbook%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>LifePak</th>
+        <td>{{eng.lifepak}}</td>
+    </tr>
+    <tr>
+        <th bgcolor="#999999"></th>
+        <td bgcolor="#999999"></td>
+    </tr>
+    <tr>
+        <th>Notes</th>
+        <td>{{eng.notes}}</td>
+    </tr>
+</table>
+{% endif %}
+{% endblock %}

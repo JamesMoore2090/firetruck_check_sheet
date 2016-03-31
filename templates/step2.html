@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<form action = '/step2' method = 'POST' class="form-horizontal">
+    
+    <h2><b>Main</b></h2>
+    <input type = "hidden" name = "check_id" value = '{{engID}}'>
+    <input type = "hidden" name = "rescue_engine" value = '{{rescue_engine}}'>
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "fuelCard"> Fuel Card
+        </label>
+    </div>
+    
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "headlights"> Headlights
+        </label>
+      </div>
+
+    
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "markerlights"> Marker Lights
+        </label>
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "turnsignals"> Turn Signals
+        </label>
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "warninglights"> Warning Lights
+        </label>
+      </div>
+    
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "siren"> Siren
+        </label>
+      </div>
+    
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "airhorn"> Airhorn
+        </label>
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "tires"> Tires
+        </label>
+      </div>
+      
+      
+      <button type="submit" class="btn btn-primary">Next</button>
+      
+      </form>
+
+
+{% endblock %}
