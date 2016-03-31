@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2><b>Create User</b></h2>
+{% if error %}
+    <h3><b><font color = "red">{{error}}</font></b></h3>
+{% endif %}
+<form action = '/createuser' method = 'POST' class="form-horizontal">
+    <div class="form-group">
+    <label for="username" class="col-sm-2 control-label">Username: </label>
+    <div class="col-sm-5">
+          <input type="text" class="form-control" name = "username" placeholder = "Username" required>
+    </div>
+    </div>
+    
+    <div class="form-group">
+    <label for="password" class="col-sm-2 control-label">Password: </label>
+    <div class="col-sm-5">
+          <input type="password" class="form-control" name = "password" placeholder = "password" required>
+    </div>
+    </div>
+    
+    <div class="form-group">
+    <label for="usertype" class="col-sm-2 control-label">User Type</label>
+    <div class="col-sm-5">
+    <select class="form-control" name = "usertype" required>
+        <option value = "" selected></option>
+        {% for type in usertype %}
+        <option value = "{{type[0]}}">{{type[1]}}</option>
+        {% endfor %}
+    </select>
+    </div>
+    </div>
+    
+    <button type="submit" class="btn btn-success">Create</button>
+</form>
+
+
+{% endblock %}

@@ -33,7 +33,10 @@ def mainIndex():
         user = cur.fetchone()
         print user
         if user > 0:
+            
             session['usertype'] = user[3]
+            print session['username'] 
+            print session['usertype']
             if session['usertype'] == 1:
                 return render_template('driver.html', username = session['username'], userType = session['usertype'])
             if session['usertype'] == 2:
@@ -334,8 +337,8 @@ def step6():
 def review():
     db = dbConnect.connectToDB()
     cur = db.cursor()
-    select = '''SELECT checksheet.check_id, engine.truck, engine.check_date, checksheet.officerApproval FROM engine JOIN checksheet
-    ON checksheet.user_id = (SELECT user_id FROM users WHERE username = %s)'''
+    select = '''SELECT checksheet.check_id, engine.truck, engine.check_date, checksheet.officerApproval FROM 
+    engine JOIN checksheet ON checksheet.user_id = (SELECT user_id FROM users WHERE username = %s)'''
     try:
         cur.execute(select, (session['username'],))
     except:
@@ -366,6 +369,61 @@ def view():
     else:
         return render_template('view.html', eng = eng_check, username = session['username'], userType = session['usertype'])
 
+    
+    
+    
+    
+    
+    
+    
+@app.route('/createuser', methods = ['GET','POST'])
+def createuser():
+    db = dbConnect.connectToDB()
+    cur = db.cursor()
+    if request.method == 'POST':
+        print 'creating new user'
+        username = request.form['username']
+        password = request.form['password']
+        utype = request.form['usertype']
+        #we are checking to see if a username is already in the system
+        check = 'SELECT user_id FROM users WHERE username = %s'
+        try:
+            cur.execute(check, (username,))
+        except:
+            print 'check Failed'
+        isUser = cur.fetchall()
+        if isUser < 1:
+            select = 'SELECT * FROM usertype'
+            try:
+                cur.execute(select)
+            except:
+                print 'SELECT failed'
+            usertype = cur.fetchall()
+            error = 'This username is already in use: %s' % (username)
+            return render_template('createuser.html', usertype = usertype, error=error, username = session['username'], userType = session['usertype'])
+        #at this point we are assumming that they are not in the system now lets add them
+        else:
+            insert = "INSERT INTO users (username, password, usertype) VALUES (%s, crypt(%s, gen_salt('bf')), %s)"
+            try:
+                cur.execute(insert, (username, password, utype,))
+                db.commit()
+            except:
+                db.rollback()
+                print 'insert Failed'
+            if session['usertype'] == 3:
+                return render_template('officer.html', username = session['username'], userType = session['usertype'])
+            else:
+                return render_template('dofficer.html', username = session['username'], userType = session['usertype'])
+    else:
+        select = 'SELECT * FROM usertype'
+        try:
+            cur.execute(select)
+        except:
+            print 'SELECT failed'
+        usertype = cur.fetchall()
+        return render_template('createuser.html', usertype = usertype, username = session['username'], userType = session['usertype'])
+
+    
     
 @app.route('/logout', methods = ['GET'])
 def logout():
