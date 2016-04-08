@@ -3,17 +3,192 @@
 {% block content %}
 
 {%if brush %}
-<h2><b>{{brush.brush_truck_id}}Check Sheet</b></h2>
+<h2><b>{{brush.brush_truck_id}} Check Sheet</b></h2>
+<table class = "table table=bordered">
+    <tr>
+        <th>Truck:</th>
+        <td>{{brush.truck}}</td>
+    </tr>
+    <tr>
+        <th>Date:</th>
+        <td>{{brush.check_date}}</td>
+    </tr>
+    <tr>
+        <th>Driver:</th>
+        <td>{{brush.driver}}</td>
+    </tr>
+    <tr>
+        <th>Officer</th>
+        <td>{{brush.officer}}</td>
+    </tr>
+    <tr>
+        <th>Miles</th>
+        <td>{{brush.miles}}</td>
+    </tr>
+    <tr>
+        <th>Engine Hours</th>
+        <td>{{brush.hours}}</td>
+    </tr>
+    <tr>
+        <th>Fuel</th>
+        <td>{{brush.fuel}}</td>
+    </tr>
+    <tr>
+        <th bgcolor="#999999"></th>
+        <td bgcolor="#999999"></td>
+    </tr>
+    <tr>
+        <th>Portable Radios</th>
+        <td>{{brush.portableradio}}</td>
+    </tr>
+    <tr>
+        <th>Headlights</th>
+        {% if brush.headlights %}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Turn Signal</th>
+        {% if brush.turnsignals%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Warning Lights</th>
+        {% if brush.emlights%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Spotlight</th>
+        {% if brush.spotlight%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Mapbooks</th>
+        {% if brush.mapbook%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th bgcolor="#999999"></th>
+        <td bgcolor="#999999"></td>
+    </tr>
+    <tr>
+        <th>Water Level</th>
+        <td>{{brush.waterlevel}}</td>
+    </tr>
+    <tr>
+        <th>Foam level</th>
+        <td>{{brush.foamlevel}}</td>
+    </tr>
+    <tr>
+        <th>Hoses/Appliances</th>
+        {% if brush.hoses%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Pump Operation</th>
+        {% if brush.pumpoperation%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Handtools</th>
+        {% if brush.handtools%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Chainsaws</th>
+        {% if brush.chainsaw%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Wench</th>
+        {% if brush.wench%}
+        <td>
+            <input type="checkbox" checked disabled>
+        </td>
+        {% else %}
+        <td>
+            <input type="checkbox" disabled>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th bgcolor="#999999"></th>
+        <td bgcolor="#999999"></td>
+    </tr>
+    <tr>
+        <th>Notes:</th>
+        <td>{{brush.notes}}</td>
+    </tr>
+    
+</table>
 {% else %}
 <h2><b>{{eng.engine_id}} Check Sheet</b></h2>
 <table class="table table-bordered">
     <tr>
         <th>Truck:</th>
-        {% if eng.truck == 'rescue_engine' %}
-           <td>Rescue Engine 8</td>
-        {% else %}
-            <td>Engine 8</td>
-        {% endif %}
+        <td>{{eng.truck}}</td>
     </tr>
     <tr>
         <th>Date:</th>

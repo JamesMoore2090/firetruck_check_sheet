@@ -7,58 +7,105 @@
     <h2><b>Main</b></h2>
     <input type = "hidden" name = "check_id" value = '{{engID}}'>
     <input type = "hidden" name = "rescue_engine" value = '{{rescue_engine}}'>
-    <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "fuelCard"> Fuel Card
-        </label>
-    </div>
+    <table class="table table-bordered">
     
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "headlights"> Headlights
-        </label>
-      </div>
-
+    <tr>
+      <th>Fuel Card</th>
+      <td>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name = "fuelCard">
+          </label>
+        </div>
+      </td>
+    </tr>
     
-      <div class="checkbox">
+    <tr>
+      <th>Headlights</th>
+      <td>
+        <div class="checkbox">
         <label>
-          <input type="checkbox" name = "markerlights"> Marker Lights
+          <input type="checkbox" name = "headlights">
         </label>
-      </div>
-
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "turnsignals"> Turn Signals
-        </label>
-      </div>
-
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "warninglights"> Warning Lights
-        </label>
-      </div>
+        </div>
+      </td>
+    </tr>
     
-      <div class="checkbox">
+    <tr>
+      <th>Marker Lights</th>
+      <td>
+        <div class="checkbox">
         <label>
-          <input type="checkbox" name = "siren"> Siren
+          <input type="checkbox" name = "markerlights">
         </label>
-      </div>
-    
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "airhorn"> Airhorn
-        </label>
-      </div>
+        </div>
+      </td>
+    </tr>
+      
 
-      <div class="checkbox">
+    <tr>
+      <th>Turn Signals</th>
+      <td>
+        <div class="checkbox">
         <label>
-          <input type="checkbox" name = "tires"> Tires
+          <input type="checkbox" name = "turnsignals">
         </label>
-      </div>
+        </div>
+      </td>
+    </tr>
+    
+    <tr>
+      <th>Warning Lights</th>
+      <td>
+        <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "warninglights">
+        </label>
+        </div>
+      </td>
+    </tr>
+      
+    <tr>
+      <th>Siren</th>
+      <td>
+        <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "siren"> 
+        </label>
+        </div>
+      </td>
+    </tr>
       
       
-      <button type="submit" class="btn btn-primary">Next</button>
+    <tr>
+      <th>Airhorn</th>
+      <td>
+        <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "airhorn">
+        </label>
+        </div>
+      </td>
+    </tr>
       
+    <tr>
+      <th>Tires</th>
+      <td>
+        <div class="checkbox">
+        <label>
+          <input type="checkbox" name = "tires">
+        </label>
+        </div>
+      </td>
+    </tr>
+      
+    <tr>
+      <td></td>
+      <td><button type="submit" class="btn btn-primary">Next</button></td>
+    </tr>  
+      
+      
+      </table>
       </form>
 
 

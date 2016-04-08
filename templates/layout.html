@@ -50,7 +50,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <!--Driver-->
-                    {% if userType == 1 %}
+                    {% if userType >= 1 or userType <= 4 %}
                     <li>
                         <a href="/step1">New Truck Check</a>
                     </li>
@@ -60,9 +60,9 @@
                     <li>
                         <a href="/logout">Logout</a>
                     </li>
-                    {% endif %}
+                    
                     <!--Officer/Driver-->
-                    {% if userType == 2 %}
+                    {% elif userType >= 5 or userType <= 8 %}
                     <li>
                         <a href="#">New Truck Check</a>
                     </li>
@@ -78,9 +78,9 @@
                     <li>
                         <a href="/logout">Logout</a>
                     </li>
-                    {% endif %}
+                    
                     <!--officer-->
-                    {% if userType == 3 %}
+                    {% elif userType >= 9 or userType <= 14 %}
                     <li>
                         <a href="#">Review Truck Checks</a>
                     </li>

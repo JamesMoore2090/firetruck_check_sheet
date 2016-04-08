@@ -1,0 +1,204 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2><b>Brush Truck</b></h2>
+
+<form action = '/submitBrush' method = 'POST' class="form-horizontal">
+    
+    <input type = "hidden" name = "check_id" value = '{{engID}}'>
+    <!--<input type = "hidden" name = "rescue_engine" value = '{{rescue_engine}}'>-->
+    
+    <table class="table table-bordered">
+        
+        <tr>
+            <th>Portable Radios</th>
+            <td>
+                <div class="col-sm-5">
+                  <input type="number" class="form-control" name = "portRadio" required>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Headlights</th>
+            <td>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name = "headlights"> 
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Turn Signals</th>
+            <td>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name = "turnsignals"> 
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        
+        
+        <tr>
+            <th>Mapbooks</th>
+            <td>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name = "mapbook"> 
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Warning Lights</th>
+            <td>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name = "warninglights"> 
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Spot Light</th>
+            <td>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name = "spotlight"> 
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th bgcolor="#999999"></th>
+            <td bgcolor="#999999"></td>
+        </tr>
+        
+        <tr>
+            <th>Water Level</th>
+            <td>
+                <div class="col-sm-5">
+                    <label class="radio-inline">
+                        <input type="radio" name="waterlevel" value="full"> Full
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="waterlevel" value="3/4"> 3/4
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="waterlevel" value="1/2"> 1/2
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="waterlevel" value="1/4"> 1/4
+                    </label>
+                </div> 
+            </td>
+        </tr>
+        <tr>
+            <th>Foam Level</th>
+            <td>
+                <div class="col-sm-5">
+                    <label class="radio-inline">
+                        <input type="radio" name="foamlevel" value="full"> Full
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="foamlevel" value="3/4"> 3/4
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="foamlevel" value="1/2"> 1/2
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="foamlevel" value="1/4"> 1/4
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Hoses/Appliances</th>
+            <td>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name = "hoses"> 
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Pump Operation</th>
+            <td>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name = "pumpOperation"> 
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Handtools</th>
+            <td>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name = "handtools"> 
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Chain Saw</th>
+            <td>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name = "chainsaw"> 
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Wench</th>
+            <td>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name = "wench"> 
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th bgcolor="#999999"></th>
+            <td bgcolor="#999999"></td>
+        </tr>
+        
+    <tr>
+        <th>Notes:</th>
+        <td>
+            <div class="col-sm-5">
+                  <textarea name = "notes" class="form-control" rows="3"></textarea>
+            </div>
+        </td>
+    </tr>
+  
+  
+    
+  <tr>
+      <td></td>
+      <td><button type="submit" class="btn btn-primary">Finish</button></td>
+  </tr>
+    </table>
+    
+</form>
+
+
+{% endblock %}

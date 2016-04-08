@@ -7,59 +7,93 @@
     <h2><b>Communication</b></h2>
         <input type = "hidden" name = "check_id" value = '{{engID}}'>
         <input type = "hidden" name = "rescue_engine" value = '{{rescue_engine}}'>
+    <table class="table table-bordered">
+      <tr>
+        <th>Portable Radios (4)</th>
+        <td>
+          <div class="col-sm-5">
+            <input type="number" class="form-control" name = "portRadio" required>
+          </div>
+        </td>
+      </tr>
       
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "helmetmarkers"> Helmet Markers(6)
-        </label>
-      </div>
-      
-    <div class="form-group">
-    <label for="portRadio" class="col-sm-2 control-label">Portable Radios (4)</label>
-    <div class="col-sm-5">
-          <input type="number" class="form-control" name = "portRadio" required>
-    </div>
-    </div>
-      
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "passport"> Passports(x-ray)
-        </label>
-      </div>
-      
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "commandboard"> Command Board
-        </label>
-      </div>
+      <tr>
+        <th>Helmet Markers (6)</th>
+        <td>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name = "helmetmarkers">
+            </label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>Passports (x-ray)</th>
+        <td>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name = "passport">
+            </label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>Command Boards</th>
+        <td>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name = "commandboard"> 
+            </label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>ERG/Terrorism Guide</th>
+        <td>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name = "erg">
+            </label>
+          </div>    
+        </td>
+      </tr>
+      <tr>
+        <th>Mapbooks (MSAG, First Due Book, ADC)</th>
+        <td>
+          <div class="checkbox">
+              <label>
+              <input type="checkbox" name = "mapbooks">
+            </label>
+          </div>  
+        </td>
+      </tr>
+      <tr>
+        <th>Headsets(6)</th>
+        <td>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name = "headsets"> 
+            </label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>Forms(6 each)</th>
+        <td>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name = "forms"> 
+            </label>
+          </div>
+        </td>
+      </tr>
 
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "erg"> ERG/Terrorism Guide
-        </label>
-      </div>
-      
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "mapbooks"> Mapbooks (MSAG, First Due Book, ADC)
-        </label>
-      </div>
-      
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "headsets"> Headsets(6)
-        </label>
-      </div>
-      
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "forms"> Forms(6 each)
-        </label>
-      </div>
-      
-        <button type="submit" class="btn btn-primary">Next</button>
-      
-      </form>
+      <tr>
+        <td></td>
+        <td><button type="submit" class="btn btn-primary">Next</button></td>
+      </tr>
+      </table>  
+    </form>
 
 
 {% endblock %}

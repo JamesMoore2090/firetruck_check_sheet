@@ -14,13 +14,21 @@
     {% for info in data %}
         <tr>
             <td><a href = "/view?check={{info[0]}}">{{info[0]}}</a></td>
-        {% if info[1] == 'rescue_engine' %}
-           <td>Rescue Engine 8</td>
-        {% else %}
-            <td>Engine 8</td>
-        {% endif %}
             <td>{{info[2]}}</td>
-        {% if info[3] %}
+            <td>{{info[3]}}</td>
+        {% if info[1] %}
+            <td>Yes</td>
+        {% else %}
+            <td>No</td>
+        {% endif %}
+        </tr> 
+    {% endfor %}
+    {% for info in brushdata %}
+        <tr>
+            <td><a href = "/view?check={{info[0]}}">{{info[0]}}</a></td>
+            <td>{{info[2]}}</td>
+            <td>{{info[3]}}</td>
+        {% if info[1] %}
             <td>Yes</td>
         {% else %}
             <td>No</td>

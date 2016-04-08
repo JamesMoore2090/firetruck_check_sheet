@@ -8,65 +8,84 @@
     
         <input type = "hidden" name = "check_id" value = '{{engID}}'>
         <input type = "hidden" name = "rescue_engine" value = '{{rescue_engine}}'>
-    
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "pumpoperation"> Pump Operation
-        </label>
-      </div>
-
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "generator"> Generator
-        </label>
-      </div>
-
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "scenelights"> Scene Lights
-        </label>
-      </div>
-
-    
-    <div class="form-group">
-    <label for="waterlevel" class="col-sm-2 control-label">Water Level</label>
-    <div class="col-sm-5">
-        <label class="radio-inline">
-            <input type="radio" name="waterlevel" value="full"> Full
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="waterlevel" value="3/4"> 3/4
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="waterlevel" value="1/2"> 1/2
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="waterlevel" value="1/4"> 1/4
-        </label>
-    </div>
-    </div>
-    
-    <div class="form-group">
-    <label for="foamlevel" class="col-sm-2 control-label">Foam Level</label>
-    <div class="col-sm-5">
-        <label class="radio-inline">
-            <input type="radio" name="foamlevel" value="full"> Full
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="foamlevel" value="3/4"> 3/4
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="foamlevel" value="1/2"> 1/2
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="foamlevel" value="1/4"> 1/4
-        </label>
-    </div>
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Next</button>
-    
-    </form>
+    <table class="table table-bordered">
+        <tr>
+            <th>Water Level</th>
+            <td>
+                <div class="col-sm-5">
+                    <label class="radio-inline">
+                        <input type="radio" name="waterlevel" value="full"> Full
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="waterlevel" value="3/4"> 3/4
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="waterlevel" value="1/2"> 1/2
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="waterlevel" value="1/4"> 1/4
+                    </label>
+                </div> 
+            </td>
+        </tr>
+        <tr>
+            <th>Foam Level</th>
+            <td>
+                <div class="col-sm-5">
+                    <label class="radio-inline">
+                        <input type="radio" name="foamlevel" value="full"> Full
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="foamlevel" value="3/4"> 3/4
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="foamlevel" value="1/2"> 1/2
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="foamlevel" value="1/4"> 1/4
+                    </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Pump Operation</th>
+            <td>
+                <div class="checkbox">
+                <label>
+                    <input type="checkbox" name = "pumpoperation"> 
+                </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Generator</th>
+            <td>
+                <div class="checkbox">
+                <label>
+                  <input type="checkbox" name = "generator"> 
+                </label>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Scene Lights</th>
+            <td>
+                <div class="checkbox">
+                <label>
+                  <input type="checkbox" name = "scenelights">
+                </label>
+                  </div>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit" class="btn btn-primary">Next</button></td>
+        </tr>
+    </table>
+</form>
 
 
 {% endblock %}

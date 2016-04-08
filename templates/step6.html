@@ -7,87 +7,140 @@
     
     <input type = "hidden" name = "check_id" value = '{{engID}}'>
 
-    <div class="form-group">
-    <label for="o2level" class="col-sm-2 control-label">Oxygen Level</label>
-    <div class="col-sm-5">
-          <input type="number" class="form-control" name = "o2level" required>
-    </div>
-    </div>
+    <table class="table table-bordered">
     
-    <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "jumpbag"> EMS Jump Bag
-        </label>
-    </div>
+    <tr>
+        <th>Oxygen Level</th>
+        <td>
+            <div class="col-sm-5">
+                  <input type="number" class="form-control" name = "o2level" required>
+            </div>
+        </td>
+    </tr>
     
+    <tr>
+        <th>EMS Jump Bags</th>
+        <td>
+            <div class="checkbox">
+                    <label>
+                  <input type="checkbox" name = "jumpbag">
+                </label>
+            </div>  
+        </td>
+    </tr>
     
+    <tr>
+        <th>Spare Oxygen</th>
+        <td>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox" name = "spareo2">
+                </label>
+            </div>
+        </td>
+    </tr>
     
-    <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "spareo2"> Spare Oxygen
-        </label>
-    </div>
+    <tr>
+        <th>Collar Bag</th>
+        <td>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox" name = "collarbag">
+                </label>
+            </div>  
+        </td>
+    </tr>
     
-    <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "collarbag"> Collar Bag
-        </label>
-    </div>
+    <tr>
+        <th>Gloves (S,M,L,Xl)</th>
+        <td>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox" name = "golves">
+                </label>
+            </div> 
+        </td>
+    </tr>
+    
+    <tr>
+        <th>Clipboard/Forms</th>
+        <td>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox" name = "clipboard">
+                </label>
+            </div>
+        </td>
+    </tr>
 
-    <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "golves"> Gloves (S,M,L,XL)
-        </label>
-    </div>
+    <tr>
+        <th>Suction Unit</th>
+        <td>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox" name = "suckunit">
+                </label>
+            </div>
+        </td>
+    </tr>
     
-    <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "clipboard"> Clipboard/Forms
-        </label>
-    </div>
+    <tr>
+        <th>Triage Bag</th>
+        <td>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox" name = "triagebag">
+                </label>
+            </div>
+        </td>
+    </tr>
     
-    <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "suckunit"> Suction Unit
-        </label>
-    </div>
+    <tr>
+        <th>LifePak or AED</th>
+        <td>
+            <div class="col-sm-5">
+                <label class="radio-inline">
+                    <input type="radio" name="lifepak" value="pass"> Pass
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="lifepak" value="fail"> Fail
+                </label>
+            </div> 
+        </td>
+    </tr>
     
-    <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "triagebag"> Triage Bag
-        </label>
-    </div>
+    <tr>
+        <th>Tough Book</th>
+        <td>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox" name = "toughbook"> 
+                </label>
+            </div>
+        </td>
+    </tr>
     
-    <div class="form-group">
-    <label for="lifepak" class="col-sm-2 control-label">LifePak or AED</label>
-    <div class="col-sm-5">
-        <label class="radio-inline">
-            <input type="radio" name="lifepak" value="pass"> Pass
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="lifepak" value="fail"> Fail
-        </label>
-    </div>
-    </div>  
-    
-    
-    <div class="checkbox">
-        <label>
-          <input type="checkbox" name = "toughbook"> Tough Book
-        </label>
-    </div>
+    <tr>
+        <th bgcolor="#999999"></th>
+        <td bgcolor="#999999"></td>
+    </tr>
 
-<hr>
-
-    <div class="form-group">
-    <label for="notes" class="col-sm-2 control-label">Notes</label>
-    <div class="col-sm-5">
-          <textarea name = "notes" class="form-control" rows="3"></textarea>
-    </div>
-  </div>
+    <tr>
+        <th>Notes:</th>
+        <td>
+            <div class="col-sm-5">
+                  <textarea name = "notes" class="form-control" rows="3"></textarea>
+            </div>
+        </td>
+    </tr>
   
   
-    <button type="submit" class="btn btn-primary">Next</button>
+    
+  <tr>
+      <td></td>
+      <td><button type="submit" class="btn btn-primary">Finish</button></td>
+  </tr>
+  </table>
   </form>
 
 
