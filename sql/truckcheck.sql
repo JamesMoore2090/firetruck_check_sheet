@@ -84,16 +84,20 @@ INSERT INTO users (username, password, userType) VALUES ('Chris Rezendes', crypt
 CREATE TABLE IF NOT EXISTS brush_truck (
   brush_truck_id serial NOT NULL ,
   truck INT NOT NULL,
+  check_date DATE NULL,
   driver INT NOT NULL,
+  officer INT NOT NULL,
   miles INT NOT NULL,
   fuel text NULL,
-  mapbook text NULL,
+  hours text NULL,
+  
+  mapbook BOOLEAN NULL,
   headlights BOOLEAN NULL,
   turnsignals BOOLEAN NULL,
-  radiocheck BOOLEAN NULL,
-  portableradio BOOLEAN NULL,
+  portableradio text NULL,
   emlights BOOLEAN NULL,
   spotlight BOOLEAN NULL,
+  
   waterLevel text NULL,
   foamlevel text NULL,
   hoses BOOLEAN NULL,
@@ -101,8 +105,9 @@ CREATE TABLE IF NOT EXISTS brush_truck (
   handtools BOOLEAN NULL,
   chainsaw BOOLEAN NULL,
   wench BOOLEAN NULL,
+  
   Notes text NULL,
-  check_date DATE NULL,
+  
   PRIMARY KEY (brush_truck_id),
     FOREIGN KEY (driver) REFERENCES Users (user_id),
     FOREIGN KEY (truck) REFERENCES truck (truck_id)

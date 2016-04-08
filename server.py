@@ -37,12 +37,8 @@ def mainIndex():
             session['usertype'] = user[3]
             print session['username'] 
             print session['usertype']
-            if session['usertype'] == 1:
-                return render_template('driver.html', username = session['username'], userType = session['usertype'])
-            if session['usertype'] == 2:
-                return render_template('dOfficer.html', username = session['username'], userType = session['usertype'])
-            if session['usertype'] == 3:
-                return render_template('officer.html', username = session['username'], userType = session['usertype'])
+            return(sendToPage())
+        
         else:
             return render_template('login.html')
     else:
@@ -61,43 +57,88 @@ def step1():
         mileage = request.form['mileage']
         engHours = request.form['hours']
         fuel = request.form['fuel']
+        # do special stuff because it is a brush truck
         if truck == 'brush':
-            print truck
-        else:
-            rescue_engine = None
-            if truck == 'rescue_engine':
-                rescue_engine = truck
-            insert = 'INSERT INTO engine (truck, check_date, driver, officer,miles,fuel,hours) VALUES (%s, %s, %s, %s, %s, %s, %s)'
+            insert = 'INSERT INTO brush_truck (truck, check_date, driver, officer,miles,fuel,hours) VALUES (3, %s, %s, %s, %s, %s, %s)'
+            print insert
             try:
-                cur.execute(insert, (truck,date,driver,officer,mileage,fuel,engHours,))
+                cur.execute(insert, (date,driver,officer,mileage,fuel,engHours,))
             except:
-                print 'insert Failed'
+                print 'insert brush Failed'
                 db.rollback()
             db.commit()
-            select = 'SELECT engine_id FROM engine WHERE check_date = %s'
+            select = 'SELECT brush_truck_id FROM brush_truck WHERE check_date = %s AND driver = %s'
             try:
-                cur.execute(select, (date,))
+                cur.execute(select, (date,driver,))
             except:
                 print 'select Failed'
             engID = cur.fetchone()
             eng_ID = engID[0]
-            insert = 'INSERT INTO checksheet (user_id, officerApproval, engine) VALUES ((SELECT user_id FROM users WHERE username = %s), FALSE, %s)'
+            insert = 'INSERT INTO checksheet (user_id, officerApproval, brush_id, truck) VALUES ((SELECT user_id FROM users WHERE username = %s), FALSE, %s, 3)'
             try:
                 cur.execute(insert, (session['username'], eng_ID,))
                 db.commit()
             except:
                 db.rollback()
                 print 'insert into checksheet failed'
+                
+            return render_template('brush.html', engID = eng_ID, username = session['username'], userType = session['usertype'])
+        else:
+            rescue_engine = None
+            truckID = None
+            if truck == 'rescue_engine':
+                rescue_engine = truck
+                truckID = 1
+            elif truck == 'engine':
+                truckID = 2
+            elif truck == 'brush':
+                truckID = 3
+            else:
+                truckID = 4
+            insert = 'INSERT INTO engine (truck, check_date, driver, officer,miles,fuel,hours) VALUES (%s, %s, %s, %s, %s, %s, %s)'
+            print insert
+            try:
+                cur.execute(insert, (truckID,date,driver,officer,mileage,fuel,engHours,))
+            except:
+                print 'insert Failed'
+                db.rollback()
+            db.commit()
+ 
+            select = 'SELECT engine_id FROM engine WHERE check_date = %s AND driver = %s'
+            try:
+                cur.execute(select, (date,driver,))
+            except:
+                print 'select Failed'
+            engID = cur.fetchone()
+            
+            eng_ID = engID[0]
+            insert = 'INSERT INTO checksheet (user_id, officerApproval, engine_id, truck) VALUES ((SELECT user_id FROM users WHERE username = %s), FALSE, %s, %s)'
+            try:
+                cur.execute(insert, (session['username'], eng_ID,truckID,))
+                db.commit()
+            except:
+                db.rollback()
+                print 'insert into checksheet failed'
+            
+        
         return render_template('step2.html', engID = eng_ID, rescue_engine = rescue_engine, username = session['username'], userType = session['usertype'])
+        
     else:
-        select = 'SELECT user_id, username FROM users WHERE usertype in (1,2,3)' 
+        select = 'SELECT user_id, username FROM users WHERE usertype in (1,2,3,4,5,6)' 
         try:
             cur.execute(select)
         except:
             print select 
             print 'failed^'
-        users = cur.fetchall()
-        return render_template('step1.html', users = users, username = session['username'], userType = session['usertype'])
+        drivers = cur.fetchall()
+        select = 'SELECT user_id, username FROM users WHERE usertype in (3,4,5,6,7,8,11,12)'
+        try:
+            cur.execute(select)
+        except:
+            print select 
+            print 'failed^'
+        officers = cur.fetchall()
+        return render_template('step1.html', drivers = drivers, officers = officers, username = session['username'], userType = session['usertype'])
 
 @app.route('/step2', methods = ['GET', 'POST'])
 def step2():
@@ -331,35 +372,59 @@ def step6():
         except:
             db.rollback()
             print 'step6 failed'
-        return render_template('driver.html', username = session['username'], userType = session['usertype'])
+        return(sendToPage())
     
 @app.route('/review', methods = ['GET'])
 def review():
     db = dbConnect.connectToDB()
     cur = db.cursor()
-    select = '''SELECT checksheet.check_id, engine.truck, engine.check_date, checksheet.officerApproval FROM 
-    engine JOIN checksheet ON checksheet.user_id = (SELECT user_id FROM users WHERE username = %s)'''
+    data = None
+    brushdata = None
+    newData = None
+    select = '''select checksheet.check_id, checksheet.officerapproval, truck.truck, engine.check_date FROM 
+                checksheet JOIN truck ON checksheet.truck = truck.truck_id JOIN engine ON 
+                checksheet.engine_id = engine.engine_id
+                WHERE checksheet.user_id = (SELECT user_id FROM users WHERE username = %s)'''
     try:
         cur.execute(select, (session['username'],))
+        data = cur.fetchall()
     except:
         print 'review query failed'
-    data = cur.fetchall()
-    print data
-    return render_template('review.html', data = data, username = session['username'], userType = session['usertype'])
+    
+    select = '''select checksheet.check_id, checksheet.officerapproval, truck.truck, brush_truck.check_date FROM 
+                checksheet JOIN truck ON checksheet.truck = truck.truck_id JOIN brush_truck ON 
+                checksheet.brush_id = brush_truck.brush_truck_id
+                WHERE checksheet.user_id = (SELECT user_id FROM users WHERE username = %s)'''
+    try:
+        cur.execute(select, (session['username'],))
+        brushdata = cur.fetchall()
+    except:
+        print 'review query failed'
+    print brushdata
+    #newData = data.append(brushdata)
+    print newData
+    return render_template('review.html', data = data, brushdata = brushdata, username = session['username'], userType = session['usertype'])
   
+#   Need to add a join for the usernames!
 @app.route('/view')
 def view():
     db = dbConnect.connectToDB()
     cur = db.cursor(cursor_factory=psycopg2.extras.DictCursor)
     checkID = request.args.get('check')
-    select = 'SELECT * FROM engine WHERE engine_id = %s'
+    select = '''SELECT engine.*, u1.username as driver, users.username as officer, truck.truck FROM checksheet JOIN engine ON 
+    checksheet.engine_id = engine.engine_id JOIN users u1 ON engine.driver = u1.user_id JOIN truck 
+    ON checksheet.truck = truck.truck_id JOIN users ON engine.officer = users.user_id
+    WHERE check_id = %s'''
     try:
         cur.execute(select, (checkID,))
     except:
         print 'view select failed'
     eng_check = cur.fetchone()
     if eng_check < 1:
-        select = 'SELECT * FROM brush_truck WHERE brush_truck_id = %s'
+        select = '''SELECT brush_truck.*, u1.username as driver, users.username as officer, truck.truck FROM checksheet JOIN brush_truck ON 
+            checksheet.brush_id = brush_truck.brush_truck_id JOIN users u1 ON brush_truck.driver = u1.user_id JOIN truck 
+            ON checksheet.truck = truck.truck_id JOIN users ON brush_truck.officer = users.user_id
+            WHERE check_id = %s'''
         try:
             cur.execute(select, (checkID,))
         except:
@@ -370,12 +435,62 @@ def view():
         return render_template('view.html', eng = eng_check, username = session['username'], userType = session['usertype'])
 
     
-    
-    
-    
-    
-    
-    
+@app.route('/submitBrush', methods = ['POST'])
+def submitBrush():
+    db = dbConnect.connectToDB()
+    cur = db.cursor()
+    if request.method == 'POST':
+        print 'submitBrush'
+        brushID = request.form['check_id']
+        portableRadios = request.form['portRadio']
+        
+        headlights = 'headlights' in request.form
+        headlights = allcaps.allCaps(headlights)
+        
+        turnsignals = 'turnsignals' in request.form
+        turnsignals = allcaps.allCaps(turnsignals)
+        
+        mapbook = 'mapbook' in request.form
+        mapbook = allcaps.allCaps(mapbook)
+        
+        warninglights = 'warninglights' in request.form
+        warninglights = allcaps.allCaps(warninglights)
+        
+        spotlight = 'spotlight' in request.form
+        spotlight = allcaps.allCaps(spotlight)
+        
+        waterlevel = request.form['waterlevel']
+        foamlevel = request.form['foamlevel']
+        
+        hoses = 'hoses' in request.form
+        hoses = allcaps.allCaps(hoses)
+        
+        pumpOperation = 'pumpOperation' in request.form
+        pumpOperation = allcaps.allCaps(pumpOperation)
+        
+        handtools = 'handtools' in request.form
+        handtools = allcaps.allCaps(handtools)
+        
+        chainsaw = 'chainsaw' in request.form
+        chainsaw = allcaps.allCaps(chainsaw)
+        
+        wench = 'wench' in request.form
+        wench = allcaps.allCaps(wench)
+        
+        notes = request.form['notes']
+        
+        update = '''UPDATE brush_truck SET mapbook = %s, headlights = %s, turnsignals = %s, portableradio = %s,
+                    emlights = %s, spotlight = %s, waterLevel = %s, foamlevel = %s, hoses = %s, pumpOperation = %s,
+                    handtools = %s, chainsaw = %s, wench = %s, notes = %s WHERE brush_truck_id = %s'''
+        try:
+            cur.execute(update, (mapbook, headlights, turnsignals, portableRadios, warninglights, spotlight, waterlevel, foamlevel, hoses, pumpOperation, handtools, chainsaw,wench,notes, brushID,))
+            db.commit()
+        except:
+            db.rollback()
+            print 'UPDATE BRUSH FAILS'
+        return(sendToPage())
+        
+        
 @app.route('/createuser', methods = ['GET','POST'])
 def createuser():
     db = dbConnect.connectToDB()
@@ -433,6 +548,16 @@ def logout():
       session.pop('usertype', None)
       
     return redirect(url_for("mainIndex"))
+
+
+def sendToPage():
+    print 'inthe sendtopage'
+    if session['usertype'] >= 1 or session['usertype'] <= 4 :
+        return render_template('driver.html', username = session['username'], userType = session['usertype'])
+    if session['usertype'] >= 5 or session['usertype'] <= 8:
+        return render_template('dOfficer.html', username = session['username'], userType = session['usertype'])
+    if session['usertype'] >= 9 or session['usertype'] <= 14:
+        return render_template('officer.html', username = session['username'], userType = session['usertype'])
 
 if __name__ == '__main__':
     app.debug=True
