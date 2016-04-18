@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2><b>Approve Check Sheet</b></h2>
+
+<!--<form method = 'POST' action ='/approveCheck'>-->
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Truck</th>
+        <th>Date</th>
+        <th>Approve</th>
+    </tr>
+    {% if data %}
+    {% for info in data %}
+        <tr>
+            <td><a href = "/view?check={{info[0]}}">{{info[0]}}</a></td>
+            <td>{{info[1]}}</td>
+            <td>{{info[2]}}</td>
+            <td>
+                <div class="checkbox">
+                <label>
+                  <input type="checkbox"  ng-change = "approve()" value = "{{info[0]}}">
+                </label>
+                </div>
+            </td> 
+        </tr>
+    {% endfor %}
+    {% endif %}
+    {% if brushdata %}
+    {% for info in brushdata %}
+        <tr>
+            <td><a href = "/view?check={{info[0]}}">{{info[0]}}</a></td>
+            <td>{{info[2]}}</td>
+            <td>{{info[3]}}</td>
+            <td>
+                <div class="checkbox">
+                <label>
+                  <input type="checkbox" name = "check" ng-model="check" value = "{{info[0]}}">
+                </label>
+                </div>
+            </td> 
+        </tr> 
+    {% endfor %}
+    {% endif %}
+    <!--<tr>-->
+    <!--        <td bgcolor="#999999"></td>-->
+    <!--        <td bgcolor="#999999"></td>-->
+    <!--        <td bgcolor="#999999"></td>-->
+    <!--        <td bgcolor="#999999"><button type="submit" class="btn btn-primary" ng-click="approve()">Submit</button></td>-->
+    <!--    </tr>-->
+</table>
+<!--</form>-->
+
+{% endblock %}

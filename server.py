@@ -4,6 +4,7 @@ import allcaps
 import uuid
 import psycopg2
 import psycopg2.extras
+import wtform
 from flask import Flask, session, jsonify, render_template, redirect, request, url_for 
 # from flask_socketio import join_room, leave_room
 from flask.ext.socketio import SocketIO, emit
@@ -11,6 +12,82 @@ from flask.ext.socketio import SocketIO, emit
 app = Flask(__name__)
 app.secret_key = os.urandom(24).encode('hex')
 socketio = SocketIO(app)
+
+@socketio.on('connect', namespace='/check')
+def makeConnection():
+    session['uuid'] = uuid.uuid1()
+    print ('Connected')
+    
+@socketio.on('identify', namespace='/check')
+def on_identify(user):
+    print('Identify: ' + user)
+    # users[session['uuid']] = {'username' : user}
+    
+    
+   
+@socketio.on('search', namespace='/check')
+def search(searchItem):
+    select = '''SELECT engine.engine_id, u1.username as driver, users.username as officer, truck.truck FROM checksheet JOIN engine ON 
+    checksheet.engine_id = engine.engine_id JOIN users u1 ON engine.driver = u1.user_id JOIN truck 
+    ON checksheet.truck = truck.truck_id JOIN users ON engine.officer = users.user_id
+    WHERE engine.check_date = %s '''
+    print("I am here")
+    
+    db = dbConnect.connectToDB()
+    cur = db.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    
+    searchQuery = ""
+    results = []
+    queryResults = []
+    searchTerm = '%{0}%'.format(searchItem)
+    
+    
+    #print(searchItem)
+    
+    cur.execute(select, (searchItem,));
+    results = cur.fetchall();
+    
+    print(results)
+    
+    # for i in range(len(results)):
+    #     resultsDict = {'text' : results[i]['movie_title']}
+    #     queryResults.append(resultsDict)
+        
+    emit('searchResults', results)
+    cur.close()
+    db.close()
+    
+@socketio.on('searchApproval', namespace='/check')
+def searchApproval(searchItem):
+    select = '''SELECT engine.engine_id, u1.username as driver, users.username as officer, truck.truck, checksheet.officerapproval FROM checksheet JOIN engine ON 
+    checksheet.engine_id = engine.engine_id JOIN users u1 ON engine.driver = u1.user_id JOIN truck 
+    ON checksheet.truck = truck.truck_id JOIN users ON engine.officer = users.user_id
+    WHERE engine.check_date = %s '''
+    print("I am here")
+    
+    db = dbConnect.connectToDB()
+    cur = db.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    
+    searchQuery = ""
+    results = []
+    queryResults = []
+    searchTerm = '%{0}%'.format(searchItem)
+    
+    
+    #print(searchItem)
+    
+    cur.execute(select, (searchItem,));
+    results = cur.fetchall();
+    
+    print(results)
+    
+    # for i in range(len(results)):
+    #     resultsDict = {'text' : results[i]['movie_title']}
+    #     queryResults.append(resultsDict)
+        
+    emit('approvalResults', results)
+    cur.close()
+    db.close()
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -380,7 +457,6 @@ def review():
     cur = db.cursor()
     data = None
     brushdata = None
-    newData = None
     select = '''select checksheet.check_id, checksheet.officerapproval, truck.truck, engine.check_date FROM 
                 checksheet JOIN truck ON checksheet.truck = truck.truck_id JOIN engine ON 
                 checksheet.engine_id = engine.engine_id
@@ -402,7 +478,6 @@ def review():
         print 'review query failed'
     print brushdata
     #newData = data.append(brushdata)
-    print newData
     return render_template('review.html', data = data, brushdata = brushdata, username = session['username'], userType = session['usertype'])
   
 #   Need to add a join for the usernames!
@@ -538,6 +613,39 @@ def createuser():
         usertype = cur.fetchall()
         return render_template('createuser.html', usertype = usertype, username = session['username'], userType = session['usertype'])
 
+@app.route('/approveCheck', methods = ['GET' , 'POST'])
+def allChecks():
+    db = dbConnect.connectToDB()
+    cur = db.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    form = wtform.approvalForm()
+    
+    if request.method == 'POST':
+        print(form.checkbox.data)
+    else:
+        data = None
+        brushdata = None
+        select = '''select checksheet.check_id, truck.truck, engine.check_date FROM 
+                    checksheet JOIN truck ON checksheet.truck = truck.truck_id JOIN engine ON 
+                    checksheet.engine_id = engine.engine_id WHERE checksheet.officerapproval = %s'''
+        try:
+            cur.execute(select, ('FALSE',))
+            data = cur.fetchall()
+        except:
+            print 'review query failed'
+        
+        select = '''select checksheet.check_id, truck.truck, brush_truck.check_date FROM 
+                    checksheet JOIN truck ON checksheet.truck = truck.truck_id JOIN brush_truck ON 
+                    checksheet.brush_id = brush_truck.brush_truck_id WHERE checksheet.officerapproval = %s'''
+        try:
+            cur.execute(select, ('FALSE',))
+            brushdata = cur.fetchall()
+        except:
+            print 'review query failed'
+        print brushdata
+        #newData = data.append(brushdata)
+        return render_template('approveCheck.html',form = form, data = data, brushdata = brushdata, username = session['username'], userType = session['usertype'])
+    
+    
     
     
 @app.route('/logout', methods = ['GET'])

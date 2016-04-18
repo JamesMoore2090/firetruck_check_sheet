@@ -11,6 +11,7 @@
         <th>Date</th>
         <th>Officer Approved</th>
     </tr>
+    {% if data %}
     {% for info in data %}
         <tr>
             <td><a href = "/view?check={{info[0]}}">{{info[0]}}</a></td>
@@ -23,6 +24,8 @@
         {% endif %}
         </tr> 
     {% endfor %}
+    {% endif %}
+    {% if brushdata %}
     {% for info in brushdata %}
         <tr>
             <td><a href = "/view?check={{info[0]}}">{{info[0]}}</a></td>
@@ -35,6 +38,7 @@
         {% endif %}
         </tr> 
     {% endfor %}
+    {% endif %}
 </table>
 
 {% endblock %}

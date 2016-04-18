@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="CheckApp">
 
 <head>
 
@@ -21,7 +21,11 @@
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
     </style>
-
+    
+    <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.4/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/controller.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/angular.min.js') }}"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -31,7 +35,7 @@
 
 </head>
 
-<body>
+<body ng-controller="CheckController">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -50,45 +54,54 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <!--Driver-->
-                    {% if userType >= 1 or userType <= 4 %}
+                    {% if userType >= 1 and userType <= 4 %}
                     <li>
                         <a href="/step1">New Truck Check</a>
                     </li>
                     <li>
-                        <a href="/review">Review Truck Checks</a>
+                        <a href="/review">Review My Truck Checks</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#searchModal">Search Checks</a>
                     </li>
                     <li>
                         <a href="/logout">Logout</a>
                     </li>
                     
                     <!--Officer/Driver-->
-                    {% elif userType >= 5 or userType <= 8 %}
+                    {% elif userType >= 5 and userType <= 8 %}
                     <li>
-                        <a href="#">New Truck Check</a>
+                        <a href="/step1">New Truck Check</a>
                     </li>
                     <li>
-                        <a href="#">Review Truck Checks</a>
+                        <a href="/review">Review My Truck Checks</a>
                     </li>
                     <li>
-                        <a href="#">Approve Truck Check</a>
+                        <a href="#"data-toggle="modal" data-target="#approveModal">Approve Truck Check</a>
                     </li>
                     <li>
-                        <a href="#">Create User</a>
+                        <a href="/createuser">Create User</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#searchModal">Search Checks</a>
                     </li>
                     <li>
                         <a href="/logout">Logout</a>
                     </li>
                     
                     <!--officer-->
-                    {% elif userType >= 9 or userType <= 14 %}
+                    {% elif userType >= 9 and userType <= 14 %}
+                    <!--<li>-->
+                    <!--    <a href="/review">Review My Truck Checks</a>-->
+                    <!--</li>-->
                     <li>
-                        <a href="#">Review Truck Checks</a>
-                    </li>
-                    <li>
-                        <a href="#">Approve Truck Check</a>
+                        <a href="#"data-toggle="modal" data-target="#approveModal" >Approve Truck Check</a>
                     </li>
                     <li>
                         <a href="/createuser">Create User</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#searchModal">Search Checks</a>
                     </li>
                     <li>
                         <a href="/logout">Logout</a>
@@ -100,6 +113,116 @@
         </div>
         <!-- /.container -->
     </nav>
+    
+    <!-- Begin Search Modal -->
+      <div id="searchModal" class="modal fade" role="dialog">
+        <!--<form role="search" ng-submit="search()">-->
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Search for Truck Checks</h4>
+              </div>
+              <div class="modal-body">
+                <!-- bootstrap forms begin -->
+                <div class="form-group">
+                  <label for="search">Search by Date</label>
+                  <input type="date" name="search" id="search" ng-model="text" class="form-control" placeholder="Search...">
+                </div>
+                <div class="panel panel-default" style="display:hidden" id="searchResultsPanel">
+                  <div class="panel panel-primary" style="margin:1em" ng-repeat="result in searchResults" >
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="ng-scope" style="vertical-align:middle;">
+                            <p><strong>Check Id: </strong><span ng-bind="result[0]"></span></p>
+                            <p><strong>Driver: </strong><span ng-bind="result[1]"></span></p>
+                            <p><strong>Officer: </strong><span ng-bind="result[2]"></span></p>
+                            <p><strong>Truck: </strong><span ng-bind="result[3]"></span></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="row">
+                  <div class="col-md-6">
+                    <button type="submit" class="btn btn-success" style="width:100%;margin-bottom:5px;" ng-disabled="!text"  ng-click="search()"  >Search</button>
+                  </div>
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" style="width:100%;">Close</button>    
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        <!--</form>-->
+      </div>
+      
+      
+      <!-- End Search Modal --> 
+      
+      <!-- Begin Search Modal -->
+      <div id="approveModal" class="modal fade" role="dialog">
+        <!--<form role="search" ng-submit="search()">-->
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Search for Truck Checks</h4>
+              </div>
+              <div class="modal-body">
+                <!-- bootstrap forms begin -->
+                <div class="form-group">
+                  <label for="search">Search by Date</label>
+                  <input type="date" name="search" id="search" ng-model="text" class="form-control" placeholder="Search...">
+                </div>
+                <div class="panel panel-default" style="display:hidden" id="searchResultsPanel">
+                  <div class="panel panel-primary" style="margin:1em" ng-repeat="result in searchResults" >
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="ng-scope" style="vertical-align:middle;">
+                            
+                            <p><strong>Check Id: </strong><span ng-bind="result[0]"></span></p>
+                            <p><strong>Driver: </strong><span ng-bind="result[1]"></span></p>
+                            <p><strong>Officer: </strong><span ng-bind="result[2]"></span></p>
+                            <p><strong>Truck: </strong><span ng-bind="result[3]"></span></p>
+                            <p><strong>Approved: </strong><span ng-bind="result[4]"></span></p>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary" style="width:100%;margin-bottom:5px;" ng-click="approval()"  >Approve</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="row">
+                  
+                  <div class="col-md-6">
+                    <button type="submit" class="btn btn-success" style="width:100%;margin-bottom:5px;" ng-disabled="!text"  ng-click="searchApproval()"  >Search</button>
+                  </div>
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" style="width:100%;">Close</button>    
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        <!--</form>-->
+      </div>
+      
+      
+      <!-- End Search Modal --> 
 
     <!-- Page Content -->
     

@@ -1,0 +1,5 @@
+from flask_wtf import Form
+from wtforms import BooleanField
+
+class approvalForm(Form):
+    checkbox = BooleanField()
